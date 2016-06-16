@@ -1,0 +1,17 @@
+{
+  "name": "",
+  "description": "",
+  "main": "",
+  "authors": [
+    ""
+  ],
+  "license": "ISC",
+  "homepage": "",
+  "ignore": [
+    "node_modules",
+    "bower_components"
+  ],
+  "dependencies": {},
+  "devDependencies": {
+  }
+}
