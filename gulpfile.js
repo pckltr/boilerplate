@@ -14,13 +14,13 @@ autoprefixer = require('gulp-autoprefixer'),
   uglify = require("gulp-uglify");
 
 // Folders
-var dev = "src/",
-  devFonts = dev + "fonts/*",
-  devImages = dev + "img/**/*",
-  devJs = dev + "js/*.js",
-  devJsVendor = dev + "js/vendor/*.js",
-  devStyle = dev + "scss/**/*.scss",
-  devTemplates = dev + "templates/**/*.jade",
+var src = "src/",
+  srcFonts = src + "fonts/*",
+  srcImages = src + "img/**/*",
+  srcJs = src + "js/*.js",
+  srcJsVendor = src + "js/vendor/*.js",
+  srcStyle = src + "scss/**/*.scss",
+  srcTemplates = src + "templates/**/*.jade",
   dist = "dist/",
   distFonts = dist + "fonts/",
   distImages = dist + "img/",
@@ -37,12 +37,12 @@ gulp.task("serve", ["deleteDist", "fonts", "images", "sass", "js", "templates", 
     open: false
   });
 
-  gulp.watch(devFonts, ["fonts"]);
-  gulp.watch(devImages, ["images"]);
-  gulp.watch(devJs, ["js"]);
-  gulp.watch(devJsVendor, ["vendor"]);
-  gulp.watch(devStyle, ["sass"]);
-  gulp.watch(devTemplates, ["templates"]);
+  gulp.watch(srcFonts, ["fonts"]);
+  gulp.watch(srcImages, ["images"]);
+  gulp.watch(srcJs, ["js"]);
+  gulp.watch(srcJsVendor, ["vendor"]);
+  gulp.watch(srcStyle, ["sass"]);
+  gulp.watch(srcTemplates, ["templates"]);
 
 });
 
@@ -53,7 +53,7 @@ gulp.task('deleteDist', function() {
 
 // Copy fonts
 gulp.task("fonts", function() {
-  return gulp.src(devFonts)
+  return gulp.src(srcFonts)
     .pipe(gulp.dest(distFonts))
     .pipe(browserSync.stream());
 });
@@ -61,7 +61,7 @@ gulp.task("fonts", function() {
 // Create template
 gulp.task('templates', function() {
   var YOUR_LOCALS = {};
-  return gulp.src(devTemplates)
+  return gulp.src(srcTemplates)
     .pipe(jade({
       pretty: '\t',
       locals: YOUR_LOCALS
@@ -72,21 +72,21 @@ gulp.task('templates', function() {
 
 // Copy HTML
 gulp.task("images", function() {
-  return gulp.src(devImages)
+  return gulp.src(srcImages)
     .pipe(gulp.dest(distImages))
     .pipe(browserSync.stream());
 });
 
 // Lint Task
 gulp.task("lint", function() {
-  return gulp.src(devJs)
+  return gulp.src(srcJs)
     .pipe(jshint())
     .pipe(jshint.reporter("default"));
 });
 
 // Compile sass
 gulp.task("sass", function() {
-  return gulp.src(devStyle)
+  return gulp.src(srcStyle)
     .pipe(sass({
       outputStyle: 'compressed'
     }))
@@ -102,7 +102,7 @@ gulp.task("sass", function() {
 
 // Concatenate & Minify JS
 gulp.task("js", function() {
-  return gulp.src(devJs)
+  return gulp.src(srcJs)
     .pipe(concat("scripts.js"))
     // .pipe(uglify()
     //     .pipe(plumber())
@@ -112,7 +112,7 @@ gulp.task("js", function() {
 
 // Concatenate & Minify vendor JS
 gulp.task("vendor", function() {
-  return gulp.src(devJsVendor)
+  return gulp.src(srcJsVendor)
     .pipe(concat("vendor.js"))
     // .pipe(uglify()
     //     .pipe(plumber())
